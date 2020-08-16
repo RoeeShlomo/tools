@@ -81,8 +81,7 @@ func (p *Plugin) Generate(file *generator.FileDescriptor) {
 		p.P(`// DeepCopyInto supports using `, typeName, ` within kubernetes types, where deepcopy-gen is used.`)
 		p.P(`func (in *`, typeName, `) DeepCopyInto(out *`, typeName, `) {`)
 		p.In()
-		p.P(`p := proto.Clone(in).(*`, typeName, `)`)
-		p.P(`*out = *p`)
+		p.P(`proto.Merge(out, in)`)
 		p.Out()
 		p.P(`}`)
 
